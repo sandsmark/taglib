@@ -24,6 +24,8 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/s3m
   ${CMAKE_CURRENT_SOURCE_DIR}/it
   ${CMAKE_CURRENT_SOURCE_DIR}/xm
+  ${CMAKE_CURRENT_SOURCE_DIR}/ebml
+  ${CMAKE_CURRENT_SOURCE_DIR}/ebml/matroska
 )
 
 if(ZLIB_FOUND)
@@ -141,6 +143,12 @@ set(tag_HDRS
   s3m/s3mproperties.h
   xm/xmfile.h
   xm/xmproperties.h
+  ebml/ebmlfile.h
+  ebml/ebmlelement.h
+  ebml/ebmlconstants.h
+  ebml/matroska/ebmlmatroskafile.h
+  ebml/matroska/ebmlmatroskaconstants.h
+  ebml/matroska/ebmlmatroskaaudio.h
 )
 
 set(mpeg_SRCS
@@ -312,6 +320,16 @@ set(toolkit_SRCS
   toolkit/tzlib.cpp
 )
 
+set(ebml_SRCS
+  ebml/ebmlfile.cpp
+  ebml/ebmlelement.cpp
+)
+
+set(matroska_SRCS
+  ebml/matroska/ebmlmatroskafile.cpp
+  ebml/matroska/ebmlmatroskaaudio.cpp
+)
+
 if(NOT WIN32)
   set(unicode_SRCS
     toolkit/unicode.cpp
@@ -335,6 +353,7 @@ set(tag_LIB_SRCS
   ${wavpack_SRCS} ${speex_SRCS} ${trueaudio_SRCS} ${riff_SRCS} ${aiff_SRCS} ${wav_SRCS}
   ${asf_SRCS} ${mp4_SRCS} ${mod_SRCS} ${s3m_SRCS} ${it_SRCS} ${xm_SRCS} ${opus_SRCS}
   ${unicode_SRCS} ${zlib_SRCS}
+  ${ebml_SRCS} ${matroska_SRCS}
   tag.cpp
   tagunion.cpp
   fileref.cpp
